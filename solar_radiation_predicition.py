@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jun  6 11:11:27 2020
+Solar radiation Prediction modelling
 
-@author: ckaln
+@author: Chandrashekhar Kalnad
 """
 
 
 # %% [code]
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import numpy as np 
+import pandas as pd 
 import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime
-
 from sklearn.preprocessing import StandardScaler
 
 data_path = "D:/Solar/data2/SolarPrediction.csv"
@@ -23,8 +22,6 @@ df.head()
 data=pd.read_csv(data_path)
 
 # %% [code]
-import matplotlib.pyplot as plt
-import seaborn as sns
 data['Radiation'].plot()
 
 # %% [code]
@@ -36,9 +33,6 @@ df['Radiation'].hist()
 # %% [code]
 corrmat = df.corr()
 sns.heatmap(corrmat)
-
-# %% [markdown]
-# # Checking Relationship between Radiation and Temp
 
 # %% [code]
 g = sns.jointplot(x="Radiation", y="Temperature", data=df)
@@ -65,9 +59,6 @@ plt.show()
 #drop low radiation values
 df = df[df['Radiation'] >= 10]
 
-# %% [markdown]
-# # Feature Engineering
-
 # %% [code]
 #Covert time to_datetime
 #Add column 'hour'
@@ -93,7 +84,6 @@ sns.barplot(x="hour", y='Radiation', data=df, palette="BuPu", ax = ax)
 ax.set_title('Mean Radiation by Hour')
 plt.show()
 
-# %% [code]
 ax = plt.axes()
 sns.barplot(x="month", y='Radiation', data=df, palette="BuPu", ax = ax, order=[9,10,11,12])
 ax.set_title('Mean Radiation by Month')
@@ -104,7 +94,6 @@ sns.barplot(x="total_time", y='Radiation', data=df, palette="BuPu", ax = ax)
 ax.set_title('Radiation by Total Daylight Hours')
 plt.show()
 
-# %% [code]
 ax = plt.axes()
 sns.barplot(x="hour", y='Humidity', data=df, palette=("coolwarm"), ax = ax)
 ax.set_title('Mean Humidity by Hour')
@@ -127,7 +116,7 @@ plt.show()
 
 # %% [code]
 
-"""
+
 from sklearn.cluster import KMeans
 
 
@@ -624,4 +613,3 @@ future = p.make_future_dataframe(periods=1825)
 forecast = p.predict(future)
 forecast.tail()
 forecastplot = p.plot_components(forecast)
-"""
